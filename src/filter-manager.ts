@@ -67,7 +67,9 @@ export async function listFilters(gmail: any) {
             userId: 'me',
         });
 
-        const filters = response.data.filters || [];
+        // Gmail API returns the array under `filter` (singular), NOT `filters`.
+        // See: https://developers.google.com/gmail/api/reference/rest/v1/users.settings.filters/list#response-body
+        const filters = response.data.filter || [];
         
         return {
             filters,
